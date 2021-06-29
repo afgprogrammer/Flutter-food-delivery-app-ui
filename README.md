@@ -1,18 +1,30 @@
-# Flutter Food Delivery Application Design
+## Flutter Food Delivery Application Design
 
-Flutter Food Delivery Application UI/UX design - day 3 Flutter Animation and UI Design.
+A part of #flutter100daysofcode. Let's create a beautiful and animated Food Delivery UI with Flutter.
 
-This repository is a part of the 100-day design in Flutter.
+[Watch it on Youtube](https://youtu.be/lff21mmYhvQ)
+<br>
 
-In this video we use, Flutter Animation, ListView, Tween, Transition, LinearGradient and so on in the one-speed video.
+## Previous Designs
+[Checkout my Youtube channel](https://youtube.com/afgprogrammer)
+<br>
 
-[Youtube Video](https://youtu.be/lff21mmYhvQ)
+## Development Setup
+Clone the repository and run the following commands:
+```
+flutter pub get
+flutter run
+```
 
-## Last Design
-- [UI Design- Day 1](https://github.com/afgprogrammer/flutter-inspiration-app-ui)
-- [UI Design- Day 2](https://github.com/afgprogrammer/Flutter-trip-app-ui)
 
 ## ScreenShot
 
 <img src="assets/screenshot/one.png" height="500em" /><img src="assets/screenshot/two.png" height="500em" /><img src="assets/screenshot/three.png" height="500em" />
 
+
+## Links
+
+* [Website](https://afgprogrammer.com)
+* [Youtube channel](https://youtube.com/afgprogrammer)
+* [Twitter](https://twitter.com/afgprogrammer)
+* [Instagram](https://instagram.com/afgprogrammer)
