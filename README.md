@@ -1,6 +1,17 @@
-## Flutter Food Delivery Application Design
+## Flutter Food Delivery Application Design - Day 3
 
-A part of #flutter100daysofcode. Let's create a beautiful and animated Food Delivery UI with Flutter.
+```dart
+class Day3 extends Flutter100DaysOfCode {
+  video() {
+    return {
+      "title": "Flutter Food Delivery Application Design",
+      "description": "Let's see how we can design a Food Delivary app UI and add some animation.",
+      "day": 3,
+      "videoLink": "https://youtu.be/lff21mmYhvQ"
+    }
+  }
+}
+```
 
 [Watch it on Youtube](https://youtu.be/lff21mmYhvQ)
 <br>
