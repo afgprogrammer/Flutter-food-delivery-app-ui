@@ -5,7 +5,7 @@ class Day3 extends Flutter100DaysOfCode {
   video() {
     return {
       "title": "Flutter Food Delivery Application Design",
-      "description": "Let's see how we can design a Food Delivary app UI and add some animation.",
+      "description": "Let's see how we can design a Food Delivery app UI and add some animation.",
       "day": 3,
       "videoLink": "https://youtu.be/lff21mmYhvQ"
     }
