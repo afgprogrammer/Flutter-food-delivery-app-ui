@@ -18,12 +18,12 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 100)
+      duration: Duration(milliseconds: 600)
     );
 
     _animation = Tween<double>(
       begin: 1.0,
-      end: 25.0
+      end: 35.0
     ).animate(_animationController);
 
     super.initState();
@@ -51,6 +51,7 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          color: Colors.black,
           image: DecorationImage(
             image: AssetImage('assets/images/starter-image.jpg'),
             fit: BoxFit.cover
