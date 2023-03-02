@@ -7,6 +7,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> categories = ["Pizza", "Burgers", "Kebab", "Desert", "Salad"];
+  List<dynamic> foods = [{
+    "image": "assets/images/one.jpg",
+    "isFavorite": false,
+  }, 
+  {
+    "image": "assets/images/two.jpg",
+    "isFavorite": false,
+  },
+  {
+    "image": "assets/images/three.jpg",
+    "isFavorite": false,
+  }
+  ];
+
+  int selectedCategory = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +34,10 @@ class _HomePageState extends State<HomePage> {
         brightness: Brightness.light,
         leading: Icon(null),
         actions: <Widget>[
-          IconButton(
+          FadeAnimation(1, IconButton(
             onPressed: () {},
             icon: Icon(Icons.shopping_basket, color: Colors.grey[800],),
-          )
+          ))
         ],
       ),
       body: SafeArea(
@@ -36,16 +53,22 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 20,),
                   Container(
                     height: 50,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        FadeAnimation(1, makeCategory(isActive: true, title: 'Pizaa')),
-                        FadeAnimation(1.3, makeCategory(isActive: false, title: 'Burgers')),
-                        FadeAnimation(1.4, makeCategory(isActive: false, title: 'Kebab')),
-                        FadeAnimation(1.5, makeCategory(isActive: false, title: 'Desert')),
-                        FadeAnimation(1.6, makeCategory(isActive: false, title: 'Salad')),
-                      ],
+                      itemCount: categories.length,
+                      itemBuilder: (context, index) => 
+                      FadeAnimation(1, makeCategory(title: categories[index], index: index))
                     ),
+                    // child: ListView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   children: <Widget>[
+                    //     FadeAnimation(1, makeCategory(title: 'Pizaa')),
+                    //     FadeAnimation(1.3, makeCategory(title: 'Burgers')),
+                    //     FadeAnimation(1.4, makeCategory(title: 'Kebab')),
+                    //     FadeAnimation(1.5, makeCategory(title: 'Desert')),
+                    //     FadeAnimation(1.6, makeCategory(title: 'Salad')),
+                    //   ],
+                    // ),
                   ),
                   SizedBox(height: 10,),
                 ],
@@ -58,14 +81,20 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    FadeAnimation(1.4, makeItem(image: 'assets/images/one.jpg')),
-                    FadeAnimation(1.5, makeItem(image: 'assets/images/two.jpg')),
-                    FadeAnimation(1.6, makeItem(image: 'assets/images/three.jpg')),
-                  ],
-                ),
+                child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: foods.length,
+                      itemBuilder: (context, index) => 
+                      FadeAnimation(1, makeItem(image: foods[index]["image"], isFavorite: foods[index]["isFavorite"], index:index))
+                    ),
+                // child: ListView(
+                //   scrollDirection: Axis.horizontal,
+                //   children: <Widget>[
+                //     FadeAnimation(1.4, makeItem(image: 'assets/images/one.jpg')),
+                //     FadeAnimation(1.5, makeItem(image: 'assets/images/two.jpg')),
+                //     FadeAnimation(1.6, makeItem(image: 'assets/images/three.jpg')),
+                //   ],
+                // ),
               ),
             ),
             SizedBox(
@@ -77,23 +106,32 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget makeCategory({isActive, title}) {
-    return AspectRatio(
-      aspectRatio: isActive ? 3 : 2.5 / 1,
-      child: Container(
-        margin: EdgeInsets.only(right: 10),
-        decoration: BoxDecoration(
-          color: isActive ? Colors.yellow[700] : Colors.white,
-          borderRadius: BorderRadius.circular(50),
+  Widget makeCategory({title, index}) {
+    return GestureDetector(
+        onTap: () {
+          setState(() {
+            selectedCategory = index;
+          });
+        },
+        child: AnimatedContainer(
+          width: 120,
+          duration: Duration(milliseconds: 300),
+          margin: EdgeInsets.only(right: 10),
+          decoration: BoxDecoration(
+            color: selectedCategory == index ? Colors.yellow[700] : Colors.grey[300],
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Center(
+            child: Text(title, style: TextStyle(
+              color: selectedCategory == index ? Colors.black : Colors.grey[700], 
+              fontSize: 16, 
+              fontWeight: FontWeight.w600),),
+          ),
         ),
-        child: Align(
-          child: Text(title, style: TextStyle(color: isActive ? Colors.white : Colors.grey[500], fontSize: 18, fontWeight: isActive ? FontWeight.bold : FontWeight.w100),),
-        ),
-      ),
     );
   }
 
-  Widget  makeItem({image}) {
+  Widget  makeItem({image, isFavorite, index}) {
     return AspectRatio(
       aspectRatio: 1 / 1.5,
       child: GestureDetector(
@@ -124,9 +162,23 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Icon(Icons.favorite, color: Colors.white,),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        foods[index]["isFavorite"] = !foods[index]["isFavorite"];
+                      });
+                    },
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: AnimatedContainer( 
+                        duration: Duration(milliseconds: 300),
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(width: 1.5, color: isFavorite ? Colors.red : Colors.transparent,)
+                        ),
+                      child: isFavorite ? Icon(Icons.favorite, color: Colors.red,) : Icon(Icons.favorite, color: Colors.white,)),
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
